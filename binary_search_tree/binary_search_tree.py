@@ -58,14 +58,9 @@ class BSTNode:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        if self == None:
-            return None
-        if self.right == None:
-            return self.value
-        if self.value >= self.right.value:
-            return self.value
-        else:
-            self.right.get_max()
+        if(self.right):
+            return self.right.get_max()
+        return self.value
 
 
     # Call the function `fn` on the value of each node
