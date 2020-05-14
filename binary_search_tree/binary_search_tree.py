@@ -10,6 +10,8 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 
+from typing import Optional
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -18,7 +20,7 @@ class BSTNode:
 		
 	# Return True if the tree contains the value
     # False if it does not
-    def contains(self, target):
+    def contains(self, target) -> bool:
         # when we start searching, self will be the root
         # compare the target against self
         # 
@@ -38,7 +40,7 @@ class BSTNode:
             return self.right.contains(target)
 
             # 5
-         
+
 
     # Insert the given value into the tree
     def insert(self, value):
@@ -65,14 +67,31 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self.value)
+        if self.left:
+            self.left.for_each(fn)
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+    
     def in_order_print(self, node):
-        pass
+        stack = []
+
+        stack.append(self)
+
+        while len(stack) > 0:
+            current = stack.pop()
+            if current.right:
+                stack.append(current.right)
+            if current.left:
+                stack.append(current.left)
+            node(current.value)
+        print(f"{stack.sort()}\n")
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
